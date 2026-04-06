@@ -1,0 +1,58 @@
+# Environment variables
+.env
+
+# Datasets
+dataset-kaggle/
+
+# Old models and weight downloads (ignoring unused ones)
+best_final_model.keras
+best_finetuned_knee_model.keras
+best_ordinal_knee_model.keras
+best_weighted_model.keras
+ResNet50_Ordinal.keras
+xception_weights_tf_dim_ordering_tf_kernels_notop.h5
+final_model_export.keras
+
+# Old notebooks
+trial1-on-kaggle-data.ipynb
+trial2-on-kaggle-data.ipynb
+trial-3-on-kaggle-dataset.ipynb
+data-sprint-35-osteoarthritis-kneexray.ipynb
+
+# Python specific
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+venv/
+.venv/
+env/
+.env/
+
+# OS specific
+.DS_Store
+Thumbs.db
+
+# Output PDFs
+*.pdf
