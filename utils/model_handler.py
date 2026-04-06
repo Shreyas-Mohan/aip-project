@@ -75,6 +75,12 @@ def apply_heatmap(original_img, heatmap, alpha=0.4):
 
 def get_reference_healthy_image():
     """Finds a healthy knee image from the local dataset folder."""
+    # We use a static asset for the cloud deployed app, as dataset-kaggle isn't pushed
+    asset_path = './assets/reference_healthy_knee.png'
+    if os.path.exists(asset_path):
+        return asset_path
+        
+    # Fallback to local dataset if asset isn't created yet
     files = glob.glob('./dataset-kaggle/train/0/*.*')
     if files:
         return files[0]
