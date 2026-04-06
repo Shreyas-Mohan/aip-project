@@ -11,7 +11,7 @@ best_ordinal_knee_model.keras
 best_weighted_model.keras
 ResNet50_Ordinal.keras
 xception_weights_tf_dim_ordering_tf_kernels_notop.h5
-final_model_export.keras
+model.Xception.keras
 
 # Old notebooks
 trial1-on-kaggle-data.ipynb

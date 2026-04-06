@@ -7,7 +7,7 @@ import cv2
 import PIL.Image
 import glob
 
-MODEL_PATH = "./model.Xception.keras"
+MODEL_PATH = "./final_model_export.keras"
 CLASS_LABELS = ["Normal (Grade 0)", "Doubtful (Grade 1)", "Mild (Grade 2)", "Moderate (Grade 3)", "Severe (Grade 4)"]
 
 def load_cnn_model():

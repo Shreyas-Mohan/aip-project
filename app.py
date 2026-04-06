@@ -60,7 +60,7 @@ with st.sidebar:
 # 3. MAIN WORKFLOW
 # ---------------------------------------------------------
 if cnn_model is None:
-    st.warning("⚠️ Model file not found. Please ensure 'model.Xception.keras' exists in the root folder.")
+    st.warning("⚠️ Model file not found. Please ensure 'final_model_export.keras' exists in the root folder.")
 
 uploaded_file = st.file_uploader("Upload a Knee X-Ray Image (JPG/PNG)", type=["jpg", "jpeg", "png"])
 
