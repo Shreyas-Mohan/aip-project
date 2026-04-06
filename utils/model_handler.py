@@ -16,10 +16,11 @@ def load_cnn_model():
     return tf.keras.models.load_model(MODEL_PATH)
 
 def preprocess_image(img):
+    img = img.convert("RGB")
     img = img.resize((128, 128))
     img_array = keras_image.img_to_array(img)
     img_array = np.expand_dims(img_array, axis=0)
-    img_array /= 255.0
+    # img_array /= 255.0  # Removing normalization as the base model was trained on 0-255 RGB values in this specific notebook
     return img_array
 
 def generate_gradcam(img_array, full_model):
@@ -27,7 +28,8 @@ def generate_gradcam(img_array, full_model):
     
     last_conv_layer_name = None
     for layer in reversed(base_model.layers):
-        if len(layer.output_shape) == 4:
+        # We only want the last valid Conv2D-like layer (excludes dense, flatten)
+        if layer.__class__.__name__ == 'Conv2D':
             last_conv_layer_name = layer.name
             break
             
@@ -40,8 +42,17 @@ def generate_gradcam(img_array, full_model):
     )
     
     with tf.GradientTape() as tape:
-        conv_outputs, predictions = grad_model(img_array)
-        loss = predictions[:, np.argmax(predictions[0])]
+        conv_outputs, base_output = grad_model(img_array)
+        tape.watch(conv_outputs)
+        
+        # Pass the base model output through the remaining classifier layers
+        preds = base_output
+        for layer in full_model.layers[1:]:
+            preds = layer(preds)
+            
+        # Target the top predicted class
+        top_pred_index = tf.argmax(preds[0])
+        loss = preds[:, top_pred_index]
         
     grads = tape.gradient(loss, conv_outputs)
     pooled_grads = tf.reduce_mean(grads, axis=(0, 1, 2))

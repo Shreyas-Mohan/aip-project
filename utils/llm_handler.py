@@ -2,8 +2,10 @@ import google.generativeai as genai
 
 def configure_gemini(api_key):
     try:
+        # Strip any extraneous whitespace or quotes which commonly cause 400 Invalid_API_KEY
+        api_key = str(api_key).strip().strip("'").strip('"')
         genai.configure(api_key=api_key)
-        return genai.GenerativeModel('gemini-2.5-pro')
+        return genai.GenerativeModel('gemini-3-flash-preview')
     except Exception as e:
         return None
 
