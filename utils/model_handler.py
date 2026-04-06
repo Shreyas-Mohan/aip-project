@@ -37,18 +37,19 @@ def generate_gradcam(img_array, full_model):
         return None
         
     grad_model = Model(
-        inputs=[base_model.inputs],
+        inputs=base_model.inputs,  # Fixed nested list bug
         outputs=[base_model.get_layer(last_conv_layer_name).output, base_model.output]
     )
     
     with tf.GradientTape() as tape:
-        conv_outputs, base_output = grad_model(img_array)
+        img_tensor = tf.convert_to_tensor(img_array, dtype=tf.float32)
+        conv_outputs, base_output = grad_model(img_tensor, training=False)
         tape.watch(conv_outputs)
         
         # Pass the base model output through the remaining classifier layers
         preds = base_output
         for layer in full_model.layers[1:]:
-            preds = layer(preds)
+            preds = layer(preds, training=False)
             
         # Target the top predicted class
         top_pred_index = tf.argmax(preds[0])
