@@ -3,6 +3,7 @@ import numpy as np
 import PIL.Image
 import os
 from dotenv import load_dotenv
+import pandas as pd
 
 # Load local .env variables
 load_dotenv()
@@ -108,7 +109,18 @@ if uploaded_file is not None and cnn_model is not None:
                 st.info("Grad-CAM not available for this layer setup.")
                 
         st.subheader("Class Probability Distribution")
-        st.bar_chart({CLASS_LABELS[i]: float(predictions[i]) for i in range(5)})
+        
+        # Create a DataFrame with ordered classes
+        df_probs = pd.DataFrame({
+            "Label": CLASS_LABELS,
+            "Probability": [float(predictions[i]) for i in range(5)]
+        })
+        
+        # Set the index to be the Label and use that for plotting
+        df_probs.set_index("Label", inplace=True)
+        
+        # Streamlit bar_chart will respect the DataFrame's natural row order in recent versions
+        st.bar_chart(df_probs)
 
     # --- TAB 2: AI REPORT (GEMINI) ---
     patient_info = {"age": patient_age, "gender": patient_gender, "history": patient_history}
