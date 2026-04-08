@@ -36,10 +36,13 @@ def generate_gradcam(img_array, full_model):
     if not last_conv_layer_name:
         return None
         
-    grad_model = Model(
-        inputs=base_model.inputs,  # Fixed nested list bug
-        outputs=[base_model.get_layer(last_conv_layer_name).output, base_model.output]
-    )
+    if not hasattr(full_model, '_cached_grad_model'):
+        full_model._cached_grad_model = Model(
+            inputs=base_model.inputs,  # Fixed nested list bug
+            outputs=[base_model.get_layer(last_conv_layer_name).output, base_model.output]
+        )
+        
+    grad_model = full_model._cached_grad_model
     
     with tf.GradientTape() as tape:
         img_tensor = tf.convert_to_tensor(img_array, dtype=tf.float32)
