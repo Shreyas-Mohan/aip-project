@@ -110,16 +110,24 @@ if uploaded_file is not None and cnn_model is not None:
                 
         st.subheader("Class Probability Distribution")
         
+        # Rename labels to start with the number so alphabetical sorting = numerical sorting
+        ordered_labels = [
+            "0 - Normal", 
+            "1 - Doubtful", 
+            "2 - Mild", 
+            "3 - Moderate", 
+            "4 - Severe"
+        ]
+        
         # Create a DataFrame with ordered classes
         df_probs = pd.DataFrame({
-            "Label": CLASS_LABELS,
+            "Label": ordered_labels,
             "Probability": [float(predictions[i]) for i in range(5)]
         })
         
-        # Set the index to be the Label and use that for plotting
+        # Set the index to be the Label
         df_probs.set_index("Label", inplace=True)
         
-        # Streamlit bar_chart will respect the DataFrame's natural row order in recent versions
         st.bar_chart(df_probs)
 
     # --- TAB 2: AI REPORT (GEMINI) ---
