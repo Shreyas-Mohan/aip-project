@@ -14,9 +14,6 @@ xception_weights_tf_dim_ordering_tf_kernels_notop.h5
 model.Xception.keras
 
 # Old notebooks
-trial1-on-kaggle-data.ipynb
-trial2-on-kaggle-data.ipynb
-trial-3-on-kaggle-dataset.ipynb
 data-sprint-35-osteoarthritis-kneexray.ipynb
 
 # Python specific
