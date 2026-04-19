@@ -17,7 +17,6 @@ models/model.MobileNetV2_Frozen.keras
 models/model.MobileNetV2_Final.keras
 
 # Old notebooks
-data-sprint-35-osteoarthritis-kneexray.ipynb
 
 # Python specific
 __pycache__/
