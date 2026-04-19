@@ -5,13 +5,16 @@
 dataset-kaggle/
 
 # Old models and weight downloads (ignoring unused ones)
-best_final_model.keras
-best_finetuned_knee_model.keras
-best_ordinal_knee_model.keras
-best_weighted_model.keras
-ResNet50_Ordinal.keras
-xception_weights_tf_dim_ordering_tf_kernels_notop.h5
-model.Xception.keras
+models/best_final_model.keras
+models/best_finetuned_knee_model.keras
+models/best_ordinal_knee_model.keras
+models/best_weighted_model.keras
+models/ResNet50_Ordinal.keras
+models/xception_weights_tf_dim_ordering_tf_kernels_notop.h5
+models/model.Xception.keras
+models/model.EfficientNet*
+models/model.MobileNetV2_Frozen.keras
+models/model.MobileNetV2_Final.keras
 
 # Old notebooks
 data-sprint-35-osteoarthritis-kneexray.ipynb
